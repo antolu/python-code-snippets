@@ -1,0 +1,70 @@
+[build-system]
+requires = [
+    "setuptools>=45",
+    "setuptools-scm[toml]>=6.2",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "code-snippets"
+dynamic = ["version", "readme"]
+authors = [
+    {name = "Anton Lu", email = "anton96lu@gmail.com"}
+]
+description = "A collection of code snippets for various purposes."
+license = {name = "GPLv3", file = "LICENSE"}
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+requires-python = ">=3.9"
+dependencies = [
+    "dataclasses"
+]
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"], content-type = "text/markdown"}
+version = { attr = "setuptools_scm.get_version" }
+
+[project.optional-dependencies]
+test = [
+    "flake8",
+    "pylint",
+    "pytest-cov"]
+dev = [
+    "black",
+    "pre-commit",
+    "isort",
+]
+
+[tool.black]
+target-version = ['py39', 'py310']
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 79
